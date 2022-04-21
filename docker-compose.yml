@@ -1,0 +1,25 @@
+version: '3.4'
+
+services:
+  users:
+    image: users
+    build:
+      context: ./src/userService
+      dockerfile: ./src/userService/Dockerfile
+    environment:
+      NODE_ENV: production
+      USERS_DB_URI: mongodb://localhost/users
+      SECRET: 'yo solo quiero un 10 porfa'
+    ports:
+      - 2:3001
+  posts:
+    image: posts
+    build:
+      context: ./src/postService
+      dockerfile: ./src/postService/Dockerfile
+    environment:
+      NODE_ENV: production
+      POSTS_DB_URI: mongodb://localhost/posts
+    ports:
+      - 3:3002
+
